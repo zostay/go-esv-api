@@ -1,0 +1,53 @@
+// Code {{.codeType}} by {{.codeGenerator}}
+// DO {{.codeEditable}} EDIT!!!
+
+package esv
+
+const (
+    DefaultBaseURL = "{{.spec.Root}}"
+)
+
+{{$wo := .wo}}
+{{range .spec.Endpoints -}}
+{{range .Optional -}}
+{{if not (index $wo .Name)}}
+{{Set $wo .Name}}
+func With{{.Name | ToCamel}}(o {{.Type}}) Option{{.Type | ToCamel}} {
+    return Option{{.Type | ToCamel}}{"{{.Name}}", o}
+}
+
+{{end -}}
+{{end -}}
+{{if eq .Result.Type "struct" -}}
+type {{.Name | ToCamel}}Result struct {
+{{- template "struct" (PrepareStruct .Result.Struct 4)}}
+}
+
+func (c Client) {{.Name | ToCamel}}({{.Required | FunctionArgs}}, o ...Option) ({{.Name | ToCamel}}Result, error) {
+    opts := make([]Option, len(o)+{{.Required | len}})
+    {{range $i, $p := .Required}}
+    opts[{{$i}}] = Option{{$p.Type | ToCamel}}{"{{$p.Name}}", {{$p.Name}}}
+    {{end}}
+    for i, opt := range o {
+        opts[i+{{.Required | len}}] = opt
+    }
+    var result {{.Name | ToCamel}}Result
+    err := c.CallEndpoint("{{.Path}}", opts, &result)
+    return result, err
+}
+{{end}}
+{{end}}
+
+{{- define "struct" -}}
+{{- $in := .Indent}}
+{{- $by := .IndentBy}}
+{{- range $i, $p := .Struct}}
+{{if or (eq $p.Type "struct") (eq $p.Type "[]struct") -}}
+{{$in}}{{$p.Name | ToCamel}} {{$p.Type}} {
+{{- template "struct" (PrepareStruct $p.Struct (Add $by 4))}}
+{{$in}}}
+{{- else -}}
+{{$in}}{{$p.Name | ToCamel}} {{$p.Type}}
+{{- end -}}
+{{- end -}}
+{{- end -}}

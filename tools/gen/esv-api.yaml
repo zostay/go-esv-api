@@ -1,0 +1,168 @@
+---
+root: https://api.esv.org/v3/
+endpoints:
+  - name: passage_text
+    path: passage/text
+    required:
+      - name: q
+        type: string
+    optional:
+      - name: include-passage-references
+        type: bool
+      - name: include-verse-numbers
+        type: bool
+      - name: include-first-verse-numbers
+        type: bool
+      - name: include-footnotes
+        type: bool
+      - name: include-footnote-body
+        type: bool
+      - name: include-headings
+        type: bool
+      - name: include-short-copyright
+        type: bool
+      - name: include-copyright
+        type: bool
+      - name: include-passage-horizontal-lines
+        type: bool
+      - name: include-heading-horizontal-lines
+        type: bool
+      - name: horizontal-line-length
+        type: int
+      - name: include-selahs
+        type: bool
+      - name: indent-using
+        type: string
+      - name: indent-paragraphs
+        type: int
+      - name: indent-poetry
+        type: bool
+      - name: indent-poetry-lines
+        type: int
+      - name: indent-declares
+        type: int
+      - name: indent-psalm-doxology
+        type: int
+      - name: line-length
+        type: int
+    result: &PassageResult
+      type: struct
+      struct:
+        - name: query
+          type: string
+        - name: canonical
+          type: string
+        - name: parsed
+          type: '[][]Location'
+        - name: passage_meta
+          type: struct
+          struct:
+            - name: canonical
+              type: string
+            - name: chapter_start
+              type: '[]Location'
+            - name: chapter_end
+              type: '[]Location'
+            - name: prev_verse
+              type: Location
+            - name: next_verse
+              type: Location
+            - name: prev_chapter
+              type: '[]Location'
+            - name: next_chapter
+              type: '[]Location'
+        - name: passages
+          type: '[]string'
+  - name: passage_html
+    path: passage/html
+    required:
+      - name: q
+        type: string
+    optional:
+      - name: include-passage-references
+        type: bool
+      - name: include-verse-numbers
+        type: bool
+      - name: include-first-verse-numbers
+        type: bool
+      - name: include-footnotes
+        type: bool
+      - name: include-footnote-body
+        type: bool
+      - name: include-headings
+        type: bool
+      - name: include-short-copyright
+        type: bool
+      - name: include-copyright
+        type: bool
+      - name: include-css-link
+        type: bool
+      - name: inline-styles
+        type: bool
+      - name: wrapping-div
+        type: bool
+      - name: div-classes
+        type: string
+      - name: paragraph-tag
+        type: string
+      - name: include-book-titles
+        type: bool
+      - name: include-verse-anchors
+        type: bool
+      - name: include-chapter-numbers
+        type: bool
+      - name: include-crossrefs
+        type: bool
+      - name: include-subheadings
+        type: bool
+      - name: include-surrounding-chapters
+        type: bool
+      - name: include-surrounding-chapters-below
+        type: string
+      - name: include-surrounding-chapters-below-threshold
+        type: int
+      - name: link-url
+        type: string
+      - name: crossref-url
+        type: string
+      - name: preface-url
+        type: string
+      - name: include-audio-link
+        type: bool
+      - name: attach-audio-link-to
+        type: string
+    result: *PassageResult
+  - name: passage_audio
+    path: passage/audio
+    required:
+      - name: q
+        type: string
+    optional: []
+    result:
+      type: redirect
+  - name: passage_search
+    path: passage/search
+    required:
+      - name: q
+        type: string
+    optional: 
+      - name: page-size
+        type: int
+      - name: page
+        type: int
+    result:
+      type: struct
+      struct: 
+        - name: page
+          type: int
+        - name: total_results
+          type: int
+        - name: results
+          type: "[]struct"
+          struct:
+            - name: reference
+              type: string
+            - name: content
+              type: string
+        - name: total_pages
+          type: int
