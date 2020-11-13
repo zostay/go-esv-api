@@ -1,9 +1,14 @@
 // Code {{.codeType}} by {{.codeGenerator}}
 // DO {{.codeEditable}} EDIT!!!
 
+// Package esv provides an SDK for easily interacting with the ESV API located
+// at https://api.esv.org/
+//
+// In order to use this API, you will need an authentication token from them.
 package esv
 
 const (
+    // DefaultBaseURL is the base URL of the ESV API site online.
     DefaultBaseURL = "{{.spec.Root}}"
 )
 
@@ -12,6 +17,8 @@ const (
 {{range .Optional -}}
 {{if not (index $wo .Name)}}
 {{Set $wo .Name}}
+// With{{.Name | ToCamel}} provides the "{{.Name}}" option to pass with your API
+// call to ESV API.
 func With{{.Name | ToCamel}}(o {{.Type}}) Option{{.Type | ToCamel}} {
     return Option{{.Type | ToCamel}}{"{{.Name}}", o}
 }
@@ -19,10 +26,14 @@ func With{{.Name | ToCamel}}(o {{.Type}}) Option{{.Type | ToCamel}} {
 {{end -}}
 {{end -}}
 {{if eq .Result.Type "struct" -}}
+// {{.Name | ToCamel}}Result is the structure returned by {{.Name | ToCamel}}
+// containing the response to your request.
 type {{.Name | ToCamel}}Result struct {
 {{- template "struct" (PrepareStruct .Result.Struct 4)}}
 }
 
+// {{.Name | ToCamel}} performs the "{{.Path}}" ESV API call and returns
+// {{.Name | ToCamel}} with your results.
 func (c Client) {{.Name | ToCamel}}({{.Required | FunctionArgs}}, o ...Option) ({{.Name | ToCamel}}Result, error) {
     opts := make([]Option, len(o)+{{.Required | len}})
     {{range $i, $p := .Required}}
