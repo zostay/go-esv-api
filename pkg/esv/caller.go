@@ -12,7 +12,7 @@ import (
 	"net/url"
 )
 
-// Client configures the ESV API. Calling New is the prefered way of getting a
+// Client configures the ESV API. Calling New is the preferred way of getting a
 // Client object.
 type Client struct {
 	// BaseURL is the absolute URL to use for API calls. It is set to
