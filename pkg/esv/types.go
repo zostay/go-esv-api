@@ -7,8 +7,6 @@ import (
 
 type Location uint
 
-type Client struct{}
-
 type Option interface {
 	UpdateQuery(q url.Values)
 }
