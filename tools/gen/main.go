@@ -89,7 +89,7 @@ func main() {
 
 	vars := make(map[string]interface{})
 	vars["codeType"] = "generated"
-	vars["codeGenerator"] = "github.com/zostay/go-esv-api-sdk/tools/gen"
+	vars["codeGenerator"] = "github.com/zostay/go-esv-api/tools/gen"
 	vars["codeEditable"] = "NOT"
 	vars["spec"] = s
 	vars["wo"] = make(map[string]bool)
