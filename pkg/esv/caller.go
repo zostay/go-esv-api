@@ -31,7 +31,7 @@ func (c Client) makeRequest(path string, os []Option) (http.Request, error) {
 		Method: "GET",
 	}
 
-	query := url.Values{}
+	query := make(url.Values)
 	for _, o := range os {
 		o.UpdateQuery(query)
 	}
@@ -45,6 +45,7 @@ func (c Client) makeRequest(path string, os []Option) (http.Request, error) {
 	requestURL := c.BaseURL.ResolveReference(pathURL)
 	req.URL = requestURL
 
+	req.Header = make(http.Header)
 	req.Header.Add("Authorization", "Token "+c.Token)
 
 	return req, nil
