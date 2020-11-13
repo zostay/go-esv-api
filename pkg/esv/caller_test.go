@@ -55,6 +55,7 @@ func TestCallEndpoint(t *testing.T) {
 
 		_, _ = w.Write(bs)
 	}))
+	defer s.Close()
 
 	testUrl, _ := url.Parse(s.URL)
 	c := Client{BaseURL: testUrl, Client: s.Client(), Token: "SECRET"}
