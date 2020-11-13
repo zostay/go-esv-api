@@ -14,27 +14,27 @@ import (
 	"gopkg.in/yaml.v3"
 )
 
-type APISpec struct {
+type apiSpec struct {
 	Root      string     `yaml:"root"`
-	Endpoints []Endpoint `yaml:"endpoints"`
+	Endpoints []endpoint `yaml:"endpoints"`
 }
 
-type Endpoint struct {
+type endpoint struct {
 	Name     string          `yaml:"name"`
 	Path     string          `yaml:"path"`
-	Required []ParameterSpec `yaml:"required"`
-	Optional []ParameterSpec `yaml:"optional"`
-	Result   ParameterSpec   `yaml:"result"`
+	Required []parameterSpec `yaml:"required"`
+	Optional []parameterSpec `yaml:"optional"`
+	Result   parameterSpec   `yaml:"result"`
 }
 
-type ParameterSpec struct {
+type parameterSpec struct {
 	Name   string          `yaml:"name"`
 	Type   string          `yaml:"type"`
-	Struct []ParameterSpec `yaml:"struct"`
+	Struct []parameterSpec `yaml:"struct"`
 }
 
-type StructSpec struct {
-	Struct   []ParameterSpec
+type structSpec struct {
+	Struct   []parameterSpec
 	Indent   string
 	IndentBy int
 }
@@ -45,7 +45,7 @@ func main() {
 		panic(fmt.Errorf("unable to read esv-api.yaml: %w", err))
 	}
 
-	var s APISpec
+	var s apiSpec
 	err = yaml.Unmarshal(specBytes, &s)
 	if err != nil {
 		panic(fmt.Errorf("error reading API spec: %w", err))
@@ -65,15 +65,15 @@ func main() {
 	tmpl := template.New("api")
 	tmpl.Funcs(map[string]interface{}{
 		"ToCamel": strcase.ToCamel,
-		"FunctionArgs": func(ps []ParameterSpec) string {
+		"FunctionArgs": func(ps []parameterSpec) string {
 			args := make([]string, len(ps))
 			for i, p := range ps {
 				args[i] = p.Name + " " + p.Type
 			}
 			return strings.Join(args, ", ")
 		},
-		"PrepareStruct": func(ps []ParameterSpec, indent int) StructSpec {
-			return StructSpec{ps, strings.Repeat(" ", indent), indent}
+		"PrepareStruct": func(ps []parameterSpec, indent int) structSpec {
+			return structSpec{ps, strings.Repeat(" ", indent), indent}
 		},
 		"Add": func(a, b int) int { return a + b },
 		"Set": func(wo map[string]bool, name string) string {
