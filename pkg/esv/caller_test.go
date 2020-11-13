@@ -19,10 +19,10 @@ func TestMakeRequest(t *testing.T) {
 	r, err := c.makeRequest(
 		"one/two",
 		[]Option{
-			OptionBool{"a", true},
-			OptionBool{"b", false},
-			OptionInt{"c", 42},
-			OptionString{"d", "foo"},
+			optionBool{"a", true},
+			optionBool{"b", false},
+			optionInt{"c", 42},
+			optionString{"d", "foo"},
 		},
 	)
 
@@ -64,10 +64,10 @@ func TestCallEndpoint(t *testing.T) {
 	err := c.CallEndpoint(
 		"zip/zap",
 		[]Option{
-			OptionBool{"a", true},
-			OptionBool{"b", false},
-			OptionInt{"c", 42},
-			OptionString{"d", "foo"},
+			optionBool{"a", true},
+			optionBool{"b", false},
+			optionInt{"c", 42},
+			optionString{"d", "foo"},
 		},
 		&robj,
 	)

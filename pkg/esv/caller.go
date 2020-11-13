@@ -1,3 +1,7 @@
+// Package esv provides an SDK for easily interacting with the ESV API located
+// at https://api.esv.org/
+//
+// In order to use this API, you will need an authentication token from them.
 package esv
 
 import (
@@ -8,12 +12,22 @@ import (
 	"net/url"
 )
 
+// Client configures the ESV API. Calling New is the prefered way of getting a
+// Client object.
 type Client struct {
+	// BaseURL is the absolute URL to use for API calls. It is set to
+	// DefaultBaseURL by default.
 	BaseURL *url.URL
-	Client  *http.Client
-	Token   string
+
+	// Client is the http.Client object ot use for making API calls.
+	Client *http.Client
+
+	// Token is your authentication token provided to you by esv.org.
+	Token string
 }
 
+// New will construct a new Client from your authentication token provided to
+// you by esv.org.
 func New(token string) Client {
 	baseURL, err := url.Parse(DefaultBaseURL)
 	if err != nil {
@@ -52,6 +66,8 @@ func (c Client) makeRequest(path string, os []Option) (http.Request, error) {
 	return req, nil
 }
 
+// CallEndpoint is a generic method for making API calls at the endpoint. This
+// method is exposed to provide flexibility, but should not normally be used.
 func (c Client) CallEndpoint(path string, o []Option, r interface{}) error {
 	req, err := c.makeRequest(path, o)
 	if err != nil {

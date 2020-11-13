@@ -65,7 +65,7 @@ func TestPassageText(t *testing.T) {
 	c, s, reqs := buildTestClientServer(h)
 	defer s.Close()
 
-	p, err := c.PassageText("foo", OptionBool{"bar", true})
+	p, err := c.PassageText("foo", optionBool{"bar", true})
 
 	if !assert.NoError(t, err) {
 		return
@@ -85,7 +85,7 @@ func TestPassageHtml(t *testing.T) {
 	c, s, reqs := buildTestClientServer(h)
 	defer s.Close()
 
-	p, err := c.PassageHtml("foo", OptionBool{"bar", true})
+	p, err := c.PassageHtml("foo", optionBool{"bar", true})
 
 	if !assert.NoError(t, err) {
 		return
