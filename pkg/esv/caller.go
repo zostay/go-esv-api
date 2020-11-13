@@ -2,6 +2,7 @@ package esv
 
 import (
 	"encoding/json"
+	"fmt"
 	"io/ioutil"
 	"net/http"
 	"net/url"
@@ -9,7 +10,7 @@ import (
 
 type Client struct {
 	BaseURL *url.URL
-	Client  http.Client
+	Client  *http.Client
 	Token   string
 }
 
@@ -21,7 +22,7 @@ func New(token string) Client {
 
 	return Client{
 		BaseURL: baseURL,
-		Client:  http.Client{},
+		Client:  &http.Client{},
 		Token:   token,
 	}
 }
@@ -39,7 +40,7 @@ func (c Client) makeRequest(path string, os []Option) (http.Request, error) {
 
 	pathURL, err := url.Parse(path)
 	if err != nil {
-		return req, err
+		return req, fmt.Errorf("error parsing constructed path and query: %w", err)
 	}
 
 	requestURL := c.BaseURL.ResolveReference(pathURL)
@@ -54,22 +55,22 @@ func (c Client) makeRequest(path string, os []Option) (http.Request, error) {
 func (c Client) CallEndpoint(path string, o []Option, r interface{}) error {
 	req, err := c.makeRequest(path, o)
 	if err != nil {
-		return err
+		return fmt.Errorf("error building request: %w", err)
 	}
 
 	res, err := c.Client.Do(&req)
 	if err != nil {
-		return err
+		return fmt.Errorf("error making request: %w", err)
 	}
 
 	resBytes, err := ioutil.ReadAll(res.Body)
 	if err != nil {
-		return err
+		return fmt.Errorf("error reading response: %w", err)
 	}
 
 	err = json.Unmarshal(resBytes, r)
 	if err != nil {
-		return err
+		return fmt.Errorf("error decoding response: %w", err)
 	}
 
 	return nil
