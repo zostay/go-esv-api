@@ -28,13 +28,13 @@ type Client struct {
 
 // New will construct a new Client from your authentication token provided to
 // you by esv.org.
-func New(token string) Client {
+func New(token string) *Client {
 	baseURL, err := url.Parse(DefaultBaseURL)
 	if err != nil {
 		panic(err)
 	}
 
-	return Client{
+	return &Client{
 		BaseURL: baseURL,
 		Client:  &http.Client{},
 		Token:   token,
