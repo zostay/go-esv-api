@@ -1,3 +1,11 @@
+WIP  TBD
+
+ * Breaking Change: `CallEndpoint` now requires a `context.Context` as the first parameter in addition to the other parameters.
+ * Breaking Change: `MakeRequest` returns a `*http.Request` instead of `http.Request`.
+ * Added the `PassageTextContext` method.
+ * Added the `PassageHtmlContext` method.
+ * Added the `PassageAudioContext` method.
+
 0.1.0  2024-01-22
 
  * Initial release.

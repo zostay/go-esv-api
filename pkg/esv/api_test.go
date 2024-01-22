@@ -1,6 +1,7 @@
 package esv_test
 
 import (
+	"context"
 	"encoding/json"
 	"net/http"
 	"net/http/httptest"
@@ -79,6 +80,26 @@ func TestPassageText(t *testing.T) {
 	assert.Equal(t, "a", p.Query)
 }
 
+func TestPassageTextContext(t *testing.T) {
+	t.Parallel()
+
+	h := TextHtmlHandler()
+
+	c, s, reqs := buildTestClientServer(h)
+	defer s.Close()
+
+	p, err := c.PassageTextContext(context.Background(), "foo", esv.OptionBool{Name: "bar", Value: true})
+
+	if !assert.NoError(t, err) {
+		return
+	}
+
+	assert.Equal(t, 1, len(*reqs))
+	assert.Equal(t, "/passage/text?bar=true&q=foo", (*reqs)[0].URL.String())
+
+	assert.Equal(t, "a", p.Query)
+}
+
 func TestPassageHtml(t *testing.T) {
 	t.Parallel()
 
@@ -88,6 +109,26 @@ func TestPassageHtml(t *testing.T) {
 	defer s.Close()
 
 	p, err := c.PassageHtml("foo", esv.OptionBool{Name: "bar", Value: true})
+
+	if !assert.NoError(t, err) {
+		return
+	}
+
+	assert.Equal(t, 1, len(*reqs))
+	assert.Equal(t, "/passage/html?bar=true&q=foo", (*reqs)[0].URL.String())
+
+	assert.Equal(t, "a", p.Query)
+}
+
+func TestPassageHtmlContext(t *testing.T) {
+	t.Parallel()
+
+	h := TextHtmlHandler()
+
+	c, s, reqs := buildTestClientServer(h)
+	defer s.Close()
+
+	p, err := c.PassageHtmlContext(context.Background(), "foo", esv.OptionBool{Name: "bar", Value: true})
 
 	if !assert.NoError(t, err) {
 		return

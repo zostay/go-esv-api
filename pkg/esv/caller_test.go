@@ -1,6 +1,7 @@
 package esv_test
 
 import (
+	"context"
 	"encoding/json"
 	"net/http"
 	"net/http/httptest"
@@ -64,6 +65,7 @@ func TestCallEndpoint(t *testing.T) {
 
 	var robj TestResult
 	err := c.CallEndpoint(
+		context.Background(),
 		"zip/zap",
 		[]esv.Option{
 			esv.OptionBool{Name: "a", Value: true},

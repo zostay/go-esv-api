@@ -3,6 +3,8 @@
 
 package esv
 
+import "context"
+
 const (
 	// DefaultBaseURL is the base URL of the ESV API site online.
 	DefaultBaseURL = "https://api.esv.org/v3/"
@@ -151,7 +153,22 @@ func (c Client) PassageText(q string, o ...Option) (PassageTextResult, error) {
 		opts[i+1] = opt
 	}
 	var result PassageTextResult
-	err := c.CallEndpoint("passage/text", opts, &result)
+	err := c.CallEndpoint(context.Background(), "passage/text", opts, &result)
+	return result, err
+}
+
+// PassageTextContext performs the "passage/text" ESV API call and returns
+// PassageText with your results.
+func (c Client) PassageTextContext(ctx context.Context, q string, o ...Option) (PassageTextResult, error) {
+	opts := make([]Option, len(o)+1)
+
+	opts[0] = OptionString{"q", q}
+
+	for i, opt := range o {
+		opts[i+1] = opt
+	}
+	var result PassageTextResult
+	err := c.CallEndpoint(ctx, "passage/text", opts, &result)
 	return result, err
 }
 
@@ -292,7 +309,22 @@ func (c Client) PassageHtml(q string, o ...Option) (PassageHtmlResult, error) {
 		opts[i+1] = opt
 	}
 	var result PassageHtmlResult
-	err := c.CallEndpoint("passage/html", opts, &result)
+	err := c.CallEndpoint(context.Background(), "passage/html", opts, &result)
+	return result, err
+}
+
+// PassageHtmlContext performs the "passage/html" ESV API call and returns
+// PassageHtml with your results.
+func (c Client) PassageHtmlContext(ctx context.Context, q string, o ...Option) (PassageHtmlResult, error) {
+	opts := make([]Option, len(o)+1)
+
+	opts[0] = OptionString{"q", q}
+
+	for i, opt := range o {
+		opts[i+1] = opt
+	}
+	var result PassageHtmlResult
+	err := c.CallEndpoint(ctx, "passage/html", opts, &result)
 	return result, err
 }
 
@@ -331,6 +363,21 @@ func (c Client) PassageSearch(q string, o ...Option) (PassageSearchResult, error
 		opts[i+1] = opt
 	}
 	var result PassageSearchResult
-	err := c.CallEndpoint("passage/search", opts, &result)
+	err := c.CallEndpoint(context.Background(), "passage/search", opts, &result)
+	return result, err
+}
+
+// PassageSearchContext performs the "passage/search" ESV API call and returns
+// PassageSearch with your results.
+func (c Client) PassageSearchContext(ctx context.Context, q string, o ...Option) (PassageSearchResult, error) {
+	opts := make([]Option, len(o)+1)
+
+	opts[0] = OptionString{"q", q}
+
+	for i, opt := range o {
+		opts[i+1] = opt
+	}
+	var result PassageSearchResult
+	err := c.CallEndpoint(ctx, "passage/search", opts, &result)
 	return result, err
 }
