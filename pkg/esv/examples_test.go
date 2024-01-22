@@ -53,3 +53,16 @@ func ExampleClient_PassageHtml() {
 		panic(err)
 	}
 }
+
+func ExampleClient_PassageSearch() {
+	client := esv.New(os.Getenv("ESV_API_KEY"))
+
+	passages, err := client.PassageSearch("resurrection")
+	if err != nil {
+		panic(err)
+	}
+
+	for _, passage := range passages.Results {
+		fmt.Printf("%s: %s\n", passage.Reference, passage.Content)
+	}
+}

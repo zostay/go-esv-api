@@ -4,7 +4,8 @@ WIP  TBD
  * Breaking Change: `MakeRequest` returns a `*http.Request` instead of `http.Request`.
  * Added the `PassageTextContext` method.
  * Added the `PassageHtmlContext` method.
- * Added the `PassageAudioContext` method.
+ * Added the `PassageSearchContext` method.
+ * Correction: Fixed errors in documentation that said I had partially implemented `PassageAudio` when I'd actually implemented `PassageSearch`. `PassageAudio` is not yet implemented.
 
 0.1.0  2024-01-22
 
@@ -59,7 +60,7 @@ WIP  TBD
      * `WithPrefaceUrl`
      * `WithIncludeAUdioLink`
      * `WithAttachAudioLinkTo`
- * Provide support for the `PassageAudio` API method.
- * The `PassageAudio` method supports these options:
+ * Provided support for the `PassageSearch` API method.
+ * The `PassageSearch` method supports these options:
      * `WithPageSize`
      * `WithPage`
