@@ -1,4 +1,4 @@
-WIP  TBD
+0.2.0  2024-01-22
 
  * Breaking Change: `CallEndpoint` now requires a `context.Context` as the first parameter in addition to the other parameters.
  * Breaking Change: `MakeRequest` returns a `*http.Request` instead of `http.Request`.
