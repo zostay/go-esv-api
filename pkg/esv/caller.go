@@ -8,7 +8,7 @@ import (
 	"context"
 	"encoding/json"
 	"fmt"
-	"io/ioutil"
+	"io"
 	"net/http"
 	"net/url"
 )
@@ -95,7 +95,7 @@ func (c Client) CallEndpoint(
 		return fmt.Errorf("error making request: %w", err)
 	}
 
-	resBytes, err := ioutil.ReadAll(res.Body)
+	resBytes, err := io.ReadAll(res.Body)
 	if err != nil {
 		return fmt.Errorf("error reading response: %w", err)
 	}
