@@ -24,6 +24,9 @@ type Client struct {
 
 	// Token is your authentication token provided to you by esv.org.
 	Token string
+
+	// UserAgent is the string to use for UserAgent. Defaults to go-esv-api/VERSION.
+	UserAgent string
 }
 
 // New will construct a new Client from your authentication token provided to
@@ -35,10 +38,15 @@ func New(token string) *Client {
 	}
 
 	return &Client{
-		BaseURL: baseURL,
-		Client:  &http.Client{},
-		Token:   token,
+		BaseURL:   baseURL,
+		Client:    &http.Client{},
+		Token:     token,
+		UserAgent: fmt.Sprintf("go-esv-api/%s", Version),
 	}
+}
+
+func (c Client) UserAgentVersion() string {
+	return fmt.Sprintf("go-esv-api/%s", Version)
 }
 
 func (c Client) MakeRequest(path string, os []Option) (http.Request, error) {
@@ -62,6 +70,7 @@ func (c Client) MakeRequest(path string, os []Option) (http.Request, error) {
 
 	req.Header = make(http.Header)
 	req.Header.Add("Authorization", "Token "+c.Token)
+	req.Header.Add("User-Agent", c.UserAgent)
 
 	return req, nil
 }
