@@ -31,6 +31,8 @@ jobs:
             echo "Coverage is less than $REQUIRED_COVERAGE %"
             exit 1
           fi
+      - name: Ensure Examples Build
+        run: go build ./examples/...
       - name: Prepare/Release Workflows Check
         run: |
           go install github.com/mikefarah/yq/v4@latest
