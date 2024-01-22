@@ -41,7 +41,7 @@ func New(token string) *Client {
 	}
 }
 
-func (c Client) makeRequest(path string, os []Option) (http.Request, error) {
+func (c Client) MakeRequest(path string, os []Option) (http.Request, error) {
 	req := http.Request{
 		Method: "GET",
 	}
@@ -69,7 +69,7 @@ func (c Client) makeRequest(path string, os []Option) (http.Request, error) {
 // CallEndpoint is a generic method for making API calls at the endpoint. This
 // method is exposed to provide flexibility, but should not normally be used.
 func (c Client) CallEndpoint(path string, o []Option, r interface{}) error {
-	req, err := c.makeRequest(path, o)
+	req, err := c.MakeRequest(path, o)
 	if err != nil {
 		return fmt.Errorf("error building request: %w", err)
 	}

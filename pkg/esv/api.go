@@ -10,116 +10,116 @@ const (
 
 // WithIncludePassageReferences provides the "include-passage-references" option to pass with your API
 // call to ESV API.
-func WithIncludePassageReferences(o bool) optionBool {
-	return optionBool{"include-passage-references", o}
+func WithIncludePassageReferences(o bool) OptionBool {
+	return OptionBool{"include-passage-references", o}
 }
 
 // WithIncludeVerseNumbers provides the "include-verse-numbers" option to pass with your API
 // call to ESV API.
-func WithIncludeVerseNumbers(o bool) optionBool {
-	return optionBool{"include-verse-numbers", o}
+func WithIncludeVerseNumbers(o bool) OptionBool {
+	return OptionBool{"include-verse-numbers", o}
 }
 
 // WithIncludeFirstVerseNumbers provides the "include-first-verse-numbers" option to pass with your API
 // call to ESV API.
-func WithIncludeFirstVerseNumbers(o bool) optionBool {
-	return optionBool{"include-first-verse-numbers", o}
+func WithIncludeFirstVerseNumbers(o bool) OptionBool {
+	return OptionBool{"include-first-verse-numbers", o}
 }
 
 // WithIncludeFootnotes provides the "include-footnotes" option to pass with your API
 // call to ESV API.
-func WithIncludeFootnotes(o bool) optionBool {
-	return optionBool{"include-footnotes", o}
+func WithIncludeFootnotes(o bool) OptionBool {
+	return OptionBool{"include-footnotes", o}
 }
 
 // WithIncludeFootnoteBody provides the "include-footnote-body" option to pass with your API
 // call to ESV API.
-func WithIncludeFootnoteBody(o bool) optionBool {
-	return optionBool{"include-footnote-body", o}
+func WithIncludeFootnoteBody(o bool) OptionBool {
+	return OptionBool{"include-footnote-body", o}
 }
 
 // WithIncludeHeadings provides the "include-headings" option to pass with your API
 // call to ESV API.
-func WithIncludeHeadings(o bool) optionBool {
-	return optionBool{"include-headings", o}
+func WithIncludeHeadings(o bool) OptionBool {
+	return OptionBool{"include-headings", o}
 }
 
 // WithIncludeShortCopyright provides the "include-short-copyright" option to pass with your API
 // call to ESV API.
-func WithIncludeShortCopyright(o bool) optionBool {
-	return optionBool{"include-short-copyright", o}
+func WithIncludeShortCopyright(o bool) OptionBool {
+	return OptionBool{"include-short-copyright", o}
 }
 
 // WithIncludeCopyright provides the "include-copyright" option to pass with your API
 // call to ESV API.
-func WithIncludeCopyright(o bool) optionBool {
-	return optionBool{"include-copyright", o}
+func WithIncludeCopyright(o bool) OptionBool {
+	return OptionBool{"include-copyright", o}
 }
 
 // WithIncludePassageHorizontalLines provides the "include-passage-horizontal-lines" option to pass with your API
 // call to ESV API.
-func WithIncludePassageHorizontalLines(o bool) optionBool {
-	return optionBool{"include-passage-horizontal-lines", o}
+func WithIncludePassageHorizontalLines(o bool) OptionBool {
+	return OptionBool{"include-passage-horizontal-lines", o}
 }
 
 // WithIncludeHeadingHorizontalLines provides the "include-heading-horizontal-lines" option to pass with your API
 // call to ESV API.
-func WithIncludeHeadingHorizontalLines(o bool) optionBool {
-	return optionBool{"include-heading-horizontal-lines", o}
+func WithIncludeHeadingHorizontalLines(o bool) OptionBool {
+	return OptionBool{"include-heading-horizontal-lines", o}
 }
 
 // WithHorizontalLineLength provides the "horizontal-line-length" option to pass with your API
 // call to ESV API.
-func WithHorizontalLineLength(o int) optionInt {
-	return optionInt{"horizontal-line-length", o}
+func WithHorizontalLineLength(o int) OptionInt {
+	return OptionInt{"horizontal-line-length", o}
 }
 
 // WithIncludeSelahs provides the "include-selahs" option to pass with your API
 // call to ESV API.
-func WithIncludeSelahs(o bool) optionBool {
-	return optionBool{"include-selahs", o}
+func WithIncludeSelahs(o bool) OptionBool {
+	return OptionBool{"include-selahs", o}
 }
 
 // WithIndentUsing provides the "indent-using" option to pass with your API
 // call to ESV API.
-func WithIndentUsing(o string) optionString {
-	return optionString{"indent-using", o}
+func WithIndentUsing(o string) OptionString {
+	return OptionString{"indent-using", o}
 }
 
 // WithIndentParagraphs provides the "indent-paragraphs" option to pass with your API
 // call to ESV API.
-func WithIndentParagraphs(o int) optionInt {
-	return optionInt{"indent-paragraphs", o}
+func WithIndentParagraphs(o int) OptionInt {
+	return OptionInt{"indent-paragraphs", o}
 }
 
 // WithIndentPoetry provides the "indent-poetry" option to pass with your API
 // call to ESV API.
-func WithIndentPoetry(o bool) optionBool {
-	return optionBool{"indent-poetry", o}
+func WithIndentPoetry(o bool) OptionBool {
+	return OptionBool{"indent-poetry", o}
 }
 
 // WithIndentPoetryLines provides the "indent-poetry-lines" option to pass with your API
 // call to ESV API.
-func WithIndentPoetryLines(o int) optionInt {
-	return optionInt{"indent-poetry-lines", o}
+func WithIndentPoetryLines(o int) OptionInt {
+	return OptionInt{"indent-poetry-lines", o}
 }
 
 // WithIndentDeclares provides the "indent-declares" option to pass with your API
 // call to ESV API.
-func WithIndentDeclares(o int) optionInt {
-	return optionInt{"indent-declares", o}
+func WithIndentDeclares(o int) OptionInt {
+	return OptionInt{"indent-declares", o}
 }
 
 // WithIndentPsalmDoxology provides the "indent-psalm-doxology" option to pass with your API
 // call to ESV API.
-func WithIndentPsalmDoxology(o int) optionInt {
-	return optionInt{"indent-psalm-doxology", o}
+func WithIndentPsalmDoxology(o int) OptionInt {
+	return OptionInt{"indent-psalm-doxology", o}
 }
 
 // WithLineLength provides the "line-length" option to pass with your API
 // call to ESV API.
-func WithLineLength(o int) optionInt {
-	return optionInt{"line-length", o}
+func WithLineLength(o int) OptionInt {
+	return OptionInt{"line-length", o}
 }
 
 // PassageTextResult is the structure returned by PassageText
@@ -145,7 +145,7 @@ type PassageTextResult struct {
 func (c Client) PassageText(q string, o ...Option) (PassageTextResult, error) {
 	opts := make([]Option, len(o)+1)
 
-	opts[0] = optionString{"q", q}
+	opts[0] = OptionString{"q", q}
 
 	for i, opt := range o {
 		opts[i+1] = opt
@@ -157,110 +157,110 @@ func (c Client) PassageText(q string, o ...Option) (PassageTextResult, error) {
 
 // WithIncludeCssLink provides the "include-css-link" option to pass with your API
 // call to ESV API.
-func WithIncludeCssLink(o bool) optionBool {
-	return optionBool{"include-css-link", o}
+func WithIncludeCssLink(o bool) OptionBool {
+	return OptionBool{"include-css-link", o}
 }
 
 // WithInlineStyles provides the "inline-styles" option to pass with your API
 // call to ESV API.
-func WithInlineStyles(o bool) optionBool {
-	return optionBool{"inline-styles", o}
+func WithInlineStyles(o bool) OptionBool {
+	return OptionBool{"inline-styles", o}
 }
 
 // WithWrappingDiv provides the "wrapping-div" option to pass with your API
 // call to ESV API.
-func WithWrappingDiv(o bool) optionBool {
-	return optionBool{"wrapping-div", o}
+func WithWrappingDiv(o bool) OptionBool {
+	return OptionBool{"wrapping-div", o}
 }
 
 // WithDivClasses provides the "div-classes" option to pass with your API
 // call to ESV API.
-func WithDivClasses(o string) optionString {
-	return optionString{"div-classes", o}
+func WithDivClasses(o string) OptionString {
+	return OptionString{"div-classes", o}
 }
 
 // WithParagraphTag provides the "paragraph-tag" option to pass with your API
 // call to ESV API.
-func WithParagraphTag(o string) optionString {
-	return optionString{"paragraph-tag", o}
+func WithParagraphTag(o string) OptionString {
+	return OptionString{"paragraph-tag", o}
 }
 
 // WithIncludeBookTitles provides the "include-book-titles" option to pass with your API
 // call to ESV API.
-func WithIncludeBookTitles(o bool) optionBool {
-	return optionBool{"include-book-titles", o}
+func WithIncludeBookTitles(o bool) OptionBool {
+	return OptionBool{"include-book-titles", o}
 }
 
 // WithIncludeVerseAnchors provides the "include-verse-anchors" option to pass with your API
 // call to ESV API.
-func WithIncludeVerseAnchors(o bool) optionBool {
-	return optionBool{"include-verse-anchors", o}
+func WithIncludeVerseAnchors(o bool) OptionBool {
+	return OptionBool{"include-verse-anchors", o}
 }
 
 // WithIncludeChapterNumbers provides the "include-chapter-numbers" option to pass with your API
 // call to ESV API.
-func WithIncludeChapterNumbers(o bool) optionBool {
-	return optionBool{"include-chapter-numbers", o}
+func WithIncludeChapterNumbers(o bool) OptionBool {
+	return OptionBool{"include-chapter-numbers", o}
 }
 
 // WithIncludeCrossrefs provides the "include-crossrefs" option to pass with your API
 // call to ESV API.
-func WithIncludeCrossrefs(o bool) optionBool {
-	return optionBool{"include-crossrefs", o}
+func WithIncludeCrossrefs(o bool) OptionBool {
+	return OptionBool{"include-crossrefs", o}
 }
 
 // WithIncludeSubheadings provides the "include-subheadings" option to pass with your API
 // call to ESV API.
-func WithIncludeSubheadings(o bool) optionBool {
-	return optionBool{"include-subheadings", o}
+func WithIncludeSubheadings(o bool) OptionBool {
+	return OptionBool{"include-subheadings", o}
 }
 
 // WithIncludeSurroundingChapters provides the "include-surrounding-chapters" option to pass with your API
 // call to ESV API.
-func WithIncludeSurroundingChapters(o bool) optionBool {
-	return optionBool{"include-surrounding-chapters", o}
+func WithIncludeSurroundingChapters(o bool) OptionBool {
+	return OptionBool{"include-surrounding-chapters", o}
 }
 
 // WithIncludeSurroundingChaptersBelow provides the "include-surrounding-chapters-below" option to pass with your API
 // call to ESV API.
-func WithIncludeSurroundingChaptersBelow(o string) optionString {
-	return optionString{"include-surrounding-chapters-below", o}
+func WithIncludeSurroundingChaptersBelow(o string) OptionString {
+	return OptionString{"include-surrounding-chapters-below", o}
 }
 
 // WithIncludeSurroundingChaptersBelowThreshold provides the "include-surrounding-chapters-below-threshold" option to pass with your API
 // call to ESV API.
-func WithIncludeSurroundingChaptersBelowThreshold(o int) optionInt {
-	return optionInt{"include-surrounding-chapters-below-threshold", o}
+func WithIncludeSurroundingChaptersBelowThreshold(o int) OptionInt {
+	return OptionInt{"include-surrounding-chapters-below-threshold", o}
 }
 
 // WithLinkUrl provides the "link-url" option to pass with your API
 // call to ESV API.
-func WithLinkUrl(o string) optionString {
-	return optionString{"link-url", o}
+func WithLinkUrl(o string) OptionString {
+	return OptionString{"link-url", o}
 }
 
 // WithCrossrefUrl provides the "crossref-url" option to pass with your API
 // call to ESV API.
-func WithCrossrefUrl(o string) optionString {
-	return optionString{"crossref-url", o}
+func WithCrossrefUrl(o string) OptionString {
+	return OptionString{"crossref-url", o}
 }
 
 // WithPrefaceUrl provides the "preface-url" option to pass with your API
 // call to ESV API.
-func WithPrefaceUrl(o string) optionString {
-	return optionString{"preface-url", o}
+func WithPrefaceUrl(o string) OptionString {
+	return OptionString{"preface-url", o}
 }
 
 // WithIncludeAudioLink provides the "include-audio-link" option to pass with your API
 // call to ESV API.
-func WithIncludeAudioLink(o bool) optionBool {
-	return optionBool{"include-audio-link", o}
+func WithIncludeAudioLink(o bool) OptionBool {
+	return OptionBool{"include-audio-link", o}
 }
 
 // WithAttachAudioLinkTo provides the "attach-audio-link-to" option to pass with your API
 // call to ESV API.
-func WithAttachAudioLinkTo(o string) optionString {
-	return optionString{"attach-audio-link-to", o}
+func WithAttachAudioLinkTo(o string) OptionString {
+	return OptionString{"attach-audio-link-to", o}
 }
 
 // PassageHtmlResult is the structure returned by PassageHtml
@@ -286,7 +286,7 @@ type PassageHtmlResult struct {
 func (c Client) PassageHtml(q string, o ...Option) (PassageHtmlResult, error) {
 	opts := make([]Option, len(o)+1)
 
-	opts[0] = optionString{"q", q}
+	opts[0] = OptionString{"q", q}
 
 	for i, opt := range o {
 		opts[i+1] = opt
@@ -298,14 +298,14 @@ func (c Client) PassageHtml(q string, o ...Option) (PassageHtmlResult, error) {
 
 // WithPageSize provides the "page-size" option to pass with your API
 // call to ESV API.
-func WithPageSize(o int) optionInt {
-	return optionInt{"page-size", o}
+func WithPageSize(o int) OptionInt {
+	return OptionInt{"page-size", o}
 }
 
 // WithPage provides the "page" option to pass with your API
 // call to ESV API.
-func WithPage(o int) optionInt {
-	return optionInt{"page", o}
+func WithPage(o int) OptionInt {
+	return OptionInt{"page", o}
 }
 
 // PassageSearchResult is the structure returned by PassageSearch
@@ -325,7 +325,7 @@ type PassageSearchResult struct {
 func (c Client) PassageSearch(q string, o ...Option) (PassageSearchResult, error) {
 	opts := make([]Option, len(o)+1)
 
-	opts[0] = optionString{"q", q}
+	opts[0] = OptionString{"q", q}
 
 	for i, opt := range o {
 		opts[i+1] = opt
