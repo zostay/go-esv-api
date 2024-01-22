@@ -1,4 +1,4 @@
-package esv
+package esv_test
 
 import (
 	"encoding/json"
@@ -8,21 +8,23 @@ import (
 	"testing"
 
 	"github.com/stretchr/testify/assert"
+
+	"github.com/zostay/go-esv-api/pkg/esv"
 )
 
 func TestMakeRequest(t *testing.T) {
 	t.Parallel()
 
 	testUrl, _ := url.Parse("http://example.com")
-	c := Client{BaseURL: testUrl, Token: "SECRET"}
+	c := esv.Client{BaseURL: testUrl, Token: "SECRET"}
 
-	r, err := c.makeRequest(
+	r, err := c.MakeRequest(
 		"one/two",
-		[]Option{
-			optionBool{"a", true},
-			optionBool{"b", false},
-			optionInt{"c", 42},
-			optionString{"d", "foo"},
+		[]esv.Option{
+			esv.OptionBool{Name: "a", Value: true},
+			esv.OptionBool{Name: "b", Value: false},
+			esv.OptionInt{Name: "c", Value: 42},
+			esv.OptionString{Name: "d", Value: "foo"},
 		},
 	)
 
@@ -58,16 +60,16 @@ func TestCallEndpoint(t *testing.T) {
 	defer s.Close()
 
 	testUrl, _ := url.Parse(s.URL)
-	c := Client{BaseURL: testUrl, Client: s.Client(), Token: "SECRET"}
+	c := esv.Client{BaseURL: testUrl, Client: s.Client(), Token: "SECRET"}
 
 	var robj TestResult
 	err := c.CallEndpoint(
 		"zip/zap",
-		[]Option{
-			optionBool{"a", true},
-			optionBool{"b", false},
-			optionInt{"c", 42},
-			optionString{"d", "foo"},
+		[]esv.Option{
+			esv.OptionBool{Name: "a", Value: true},
+			esv.OptionBool{Name: "b", Value: false},
+			esv.OptionInt{Name: "c", Value: 42},
+			esv.OptionString{Name: "d", Value: "foo"},
 		},
 		&robj,
 	)

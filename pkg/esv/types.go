@@ -17,29 +17,29 @@ type Option interface {
 	UpdateQuery(url.Values)
 }
 
-type optionBool struct {
-	name  string
-	value bool
+type OptionBool struct {
+	Name  string
+	Value bool
 }
 
-func (o optionBool) UpdateQuery(q url.Values) {
-	q.Add(o.name, strconv.FormatBool(o.value))
+func (o OptionBool) UpdateQuery(q url.Values) {
+	q.Add(o.Name, strconv.FormatBool(o.Value))
 }
 
-type optionInt struct {
-	name  string
-	value int
+type OptionInt struct {
+	Name  string
+	Value int
 }
 
-func (o optionInt) UpdateQuery(q url.Values) {
-	q.Add(o.name, strconv.FormatInt(int64(o.value), 10))
+func (o OptionInt) UpdateQuery(q url.Values) {
+	q.Add(o.Name, strconv.FormatInt(int64(o.Value), 10))
 }
 
-type optionString struct {
-	name  string
-	value string
+type OptionString struct {
+	Name  string
+	Value string
 }
 
-func (o optionString) UpdateQuery(q url.Values) {
-	q.Add(o.name, o.value)
+func (o OptionString) UpdateQuery(q url.Values) {
+	q.Add(o.Name, o.Value)
 }
