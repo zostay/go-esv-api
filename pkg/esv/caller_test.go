@@ -3,6 +3,7 @@ package esv_test
 import (
 	"context"
 	"encoding/json"
+	"fmt"
 	"net/http"
 	"net/http/httptest"
 	"net/url"
@@ -17,7 +18,11 @@ func TestMakeRequest(t *testing.T) {
 	t.Parallel()
 
 	testUrl, _ := url.Parse("http://example.com")
-	c := esv.Client{BaseURL: testUrl, Token: "SECRET"}
+	c := esv.Client{
+		BaseURL:   testUrl,
+		Token:     "SECRET",
+		UserAgent: fmt.Sprintf("go-esv-api/%s", esv.Version()),
+	}
 
 	r, err := c.MakeRequest(
 		"one/two",
@@ -36,6 +41,7 @@ func TestMakeRequest(t *testing.T) {
 	assert.Equal(t, "GET", r.Method, "GET")
 	assert.Equal(t, "http://example.com/one/two?a=true&b=false&c=42&d=foo", r.URL.String())
 	assert.Equal(t, "Token SECRET", r.Header.Get("Authorization"))
+	assert.Equal(t, "go-esv-api/"+esv.Version(), r.Header.Get("User-Agent"))
 }
 
 func TestCallEndpoint(t *testing.T) {
@@ -86,11 +92,4 @@ func TestCallEndpoint(t *testing.T) {
 	assert.Equal(t, 1, len(reqs))
 	assert.Equal(t, "GET", reqs[0].Method)
 	assert.Equal(t, "/zip/zap?a=true&b=false&c=42&d=foo", reqs[0].URL.String())
-}
-
-func TestClient_UserAgentVersion(t *testing.T) {
-	t.Parallel()
-
-	c := esv.Client{}
-	assert.Equal(t, "go-esv-api/"+esv.Version, c.UserAgentVersion())
 }

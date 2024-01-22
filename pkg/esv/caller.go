@@ -42,12 +42,8 @@ func New(token string) *Client {
 		BaseURL:   baseURL,
 		Client:    &http.Client{},
 		Token:     token,
-		UserAgent: fmt.Sprintf("go-esv-api/%s", Version),
+		UserAgent: fmt.Sprintf("go-esv-api/%s", Version()),
 	}
-}
-
-func (c Client) UserAgentVersion() string {
-	return fmt.Sprintf("go-esv-api/%s", Version())
 }
 
 func (c Client) MakeRequest(path string, os []Option) (*http.Request, error) {
@@ -71,7 +67,7 @@ func (c Client) MakeRequest(path string, os []Option) (*http.Request, error) {
 
 	req.Header = make(http.Header)
 	req.Header.Add("Authorization", "Token "+c.Token)
-	req.Header.Set("User-Agent", c.UserAgent)
+	req.Header.Add("User-Agent", c.UserAgent)
 
 	return &req, nil
 }
