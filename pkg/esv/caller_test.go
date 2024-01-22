@@ -14,7 +14,16 @@ import (
 	"github.com/zostay/go-esv-api/pkg/esv"
 )
 
-func TestMakeRequest(t *testing.T) {
+func TestNew(t *testing.T) {
+	t.Parallel()
+
+	c := esv.New("SECRET")
+	assert.Equal(t, "https://api.esv.org/v3/", c.BaseURL.String())
+	assert.Equal(t, "SECRET", c.Token)
+	assert.Equal(t, "go-esv-api/"+esv.Version(), c.UserAgent)
+}
+
+func TestClient_MakeRequest(t *testing.T) {
 	t.Parallel()
 
 	testUrl, _ := url.Parse("http://example.com")
@@ -44,7 +53,7 @@ func TestMakeRequest(t *testing.T) {
 	assert.Equal(t, "go-esv-api/"+esv.Version(), r.Header.Get("User-Agent"))
 }
 
-func TestCallEndpoint(t *testing.T) {
+func TestClient_CallEndpoint(t *testing.T) {
 	t.Parallel()
 
 	type TestResult struct {
