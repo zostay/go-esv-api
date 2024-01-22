@@ -1,4 +1,4 @@
-WIP  TBD
+0.1.0  2024-01-22
 
  * Initial release.
  * Setup a API descriptor file in `tools/gen/esv-api.yaml` that describes the API in a simple format. Then, generate the AIP code using that description using a template in `tools/gen/api.go.tmpl`.
