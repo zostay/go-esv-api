@@ -17,6 +17,16 @@ To use this package in your project, import it in the usual Go way:
 go get github.com/zostay/go-esv-api
 ```
 
+# Examples
+
+While this does not provide an installed binary, there are some example in the `example/` directory:
+
+```shell
+go run ./examplex/text
+go run ./example/html
+go run ./example/search
+```
+
 # Usage
 
 To use the API, you will need to construct a client, and then make API calls 

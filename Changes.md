@@ -5,6 +5,7 @@ WIP  TBD
  * Added the `PassageTextContext` method.
  * Added the `PassageHtmlContext` method.
  * Added the `PassageSearchContext` method.
+ * Added the `examples` folder with a few working examples.
  * Correction: Fixed errors in documentation that said I had partially implemented `PassageAudio` when I'd actually implemented `PassageSearch`. `PassageAudio` is not yet implemented.
  * Fix: The User-Agent string was being sent incorrectly, so the previous release was broken. :disappointed:
 
