@@ -17,6 +17,16 @@ To use this package in your project, import it in the usual Go way:
 go get github.com/zostay/go-esv-api
 ```
 
+# Examples
+
+While this does not provide an installed binary, there are some example in the `example/` directory:
+
+```shell
+go run ./examplex/text
+go run ./example/html
+go run ./example/search
+```
+
 # Usage
 
 To use the API, you will need to construct a client, and then make API calls 
@@ -134,10 +144,38 @@ func main() {
 }
 ```
 
+## Passage Search
+
+The `PassageSearch` method will return a list of passages that match the
+provided query.
+
+```go
+package main
+
+import (
+    "fmt"
+    "os"
+
+    "github.com/zostay/go-esv-api/pkg/esv"
+)
+
+func main() {
+    client := esv.New(os.Getenv("ESV_API_KEY"))
+
+    passages, err := client.PassageSearch("resurrection")
+    if err != nil {
+        panic(err)
+    }
+
+    for _, passage := range passages.Results {
+        fmt.Printf("%s: %s\n", passage.Reference, passage.Content)
+    }
+}
+```
+
 ## Passage Audio
 
-As of this writing, this endpoint is partially implemented, but not working. 
-See below.
+This is not yet implemented. See below.
 
 # Implemented vs. To Do
 

@@ -1,3 +1,14 @@
+WIP  TBD
+
+ * Breaking Change: `CallEndpoint` now requires a `context.Context` as the first parameter in addition to the other parameters.
+ * Breaking Change: `MakeRequest` returns a `*http.Request` instead of `http.Request`.
+ * Added the `PassageTextContext` method.
+ * Added the `PassageHtmlContext` method.
+ * Added the `PassageSearchContext` method.
+ * Added the `examples` folder with a few working examples.
+ * Correction: Fixed errors in documentation that said I had partially implemented `PassageAudio` when I'd actually implemented `PassageSearch`. `PassageAudio` is not yet implemented.
+ * Fix: The User-Agent string was being sent incorrectly, so the previous release was broken. :disappointed:
+
 0.1.0  2024-01-22
 
  * Initial release.
@@ -51,7 +62,7 @@
      * `WithPrefaceUrl`
      * `WithIncludeAUdioLink`
      * `WithAttachAudioLinkTo`
- * Provide support for the `PassageAudio` API method.
- * The `PassageAudio` method supports these options:
+ * Provided support for the `PassageSearch` API method.
+ * The `PassageSearch` method supports these options:
      * `WithPageSize`
      * `WithPage`

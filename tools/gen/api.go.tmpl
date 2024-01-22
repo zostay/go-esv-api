@@ -3,6 +3,8 @@
 
 package esv
 
+import "context"
+
 const (
     // DefaultBaseURL is the base URL of the ESV API site online.
     DefaultBaseURL = "{{.spec.Root}}"
@@ -39,7 +41,22 @@ func (c Client) {{.Name | ToCamel}}({{.Required | FunctionArgs}}, o ...Option) (
         opts[i+{{.Required | len}}] = opt
     }
     var result {{.Name | ToCamel}}Result
-    err := c.CallEndpoint("{{.Path}}", opts, &result)
+    err := c.CallEndpoint(context.Background(), "{{.Path}}", opts, &result)
+    return result, err
+}
+
+// {{.Name | ToCamel}}Context performs the "{{.Path}}" ESV API call and returns
+// {{.Name | ToCamel}} with your results.
+func (c Client) {{.Name | ToCamel}}Context(ctx context.Context, {{.Required | FunctionArgs}}, o ...Option) ({{.Name | ToCamel}}Result, error) {
+    opts := make([]Option, len(o)+{{.Required | len}})
+    {{range $i, $p := .Required}}
+    opts[{{$i}}] = Option{{$p.Type | ToCamel}}{"{{$p.Name}}", {{$p.Name}}}
+    {{end}}
+    for i, opt := range o {
+        opts[i+{{.Required | len}}] = opt
+    }
+    var result {{.Name | ToCamel}}Result
+    err := c.CallEndpoint(ctx, "{{.Path}}", opts, &result)
     return result, err
 }
 {{end}}

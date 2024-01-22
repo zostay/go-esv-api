@@ -1,7 +1,9 @@
 package esv_test
 
 import (
+	"context"
 	"encoding/json"
+	"fmt"
 	"net/http"
 	"net/http/httptest"
 	"net/url"
@@ -12,11 +14,24 @@ import (
 	"github.com/zostay/go-esv-api/pkg/esv"
 )
 
-func TestMakeRequest(t *testing.T) {
+func TestNew(t *testing.T) {
+	t.Parallel()
+
+	c := esv.New("SECRET")
+	assert.Equal(t, "https://api.esv.org/v3/", c.BaseURL.String())
+	assert.Equal(t, "SECRET", c.Token)
+	assert.Equal(t, "go-esv-api/"+esv.Version(), c.UserAgent)
+}
+
+func TestClient_MakeRequest(t *testing.T) {
 	t.Parallel()
 
 	testUrl, _ := url.Parse("http://example.com")
-	c := esv.Client{BaseURL: testUrl, Token: "SECRET"}
+	c := esv.Client{
+		BaseURL:   testUrl,
+		Token:     "SECRET",
+		UserAgent: fmt.Sprintf("go-esv-api/%s", esv.Version()),
+	}
 
 	r, err := c.MakeRequest(
 		"one/two",
@@ -35,9 +50,10 @@ func TestMakeRequest(t *testing.T) {
 	assert.Equal(t, "GET", r.Method, "GET")
 	assert.Equal(t, "http://example.com/one/two?a=true&b=false&c=42&d=foo", r.URL.String())
 	assert.Equal(t, "Token SECRET", r.Header.Get("Authorization"))
+	assert.Equal(t, "go-esv-api/"+esv.Version(), r.Header.Get("User-Agent"))
 }
 
-func TestCallEndpoint(t *testing.T) {
+func TestClient_CallEndpoint(t *testing.T) {
 	t.Parallel()
 
 	type TestResult struct {
@@ -64,6 +80,7 @@ func TestCallEndpoint(t *testing.T) {
 
 	var robj TestResult
 	err := c.CallEndpoint(
+		context.Background(),
 		"zip/zap",
 		[]esv.Option{
 			esv.OptionBool{Name: "a", Value: true},

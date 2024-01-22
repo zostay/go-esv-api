@@ -1,4 +1,4 @@
-package esv_test
+package main
 
 import (
 	"fmt"
@@ -9,18 +9,7 @@ import (
 	"github.com/zostay/go-esv-api/pkg/esv"
 )
 
-func ExampleClient_PassageText() {
-	client := esv.New(os.Getenv("ESV_API_KEY"))
-
-	passage, err := client.PassageText("John 3:16")
-	if err != nil {
-		panic(err)
-	}
-
-	fmt.Println(passage.Passages[0])
-}
-
-func ExampleClient_PassageHtml() {
+func main() {
 	client := esv.New(os.Getenv("ESV_API_KEY"))
 
 	passage, err := client.PassageHtml("John 3:16")
@@ -51,18 +40,5 @@ func ExampleClient_PassageHtml() {
 	err = exec.Command(openCmd, "john316.html").Run()
 	if err != nil {
 		panic(err)
-	}
-}
-
-func ExampleClient_PassageSearch() {
-	client := esv.New(os.Getenv("ESV_API_KEY"))
-
-	passages, err := client.PassageSearch("resurrection")
-	if err != nil {
-		panic(err)
-	}
-
-	for _, passage := range passages.Results {
-		fmt.Printf("%s: %s\n", passage.Reference, passage.Content)
 	}
 }

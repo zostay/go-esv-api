@@ -1,6 +1,14 @@
 package esv
 
-import _ "embed"
+import (
+	_ "embed"
+	"strings"
+)
 
 //go:embed version.txt
-var Version string
+var version string
+
+// Version returns the version of the ESV API client.
+func Version() string {
+	return strings.TrimSpace(version)
+}

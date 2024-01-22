@@ -5,9 +5,10 @@
 package esv
 
 import (
+	"context"
 	"encoding/json"
 	"fmt"
-	"io/ioutil"
+	"io"
 	"net/http"
 	"net/url"
 )
@@ -41,15 +42,11 @@ func New(token string) *Client {
 		BaseURL:   baseURL,
 		Client:    &http.Client{},
 		Token:     token,
-		UserAgent: fmt.Sprintf("go-esv-api/%s", Version),
+		UserAgent: fmt.Sprintf("go-esv-api/%s", Version()),
 	}
 }
 
-func (c Client) UserAgentVersion() string {
-	return fmt.Sprintf("go-esv-api/%s", Version)
-}
-
-func (c Client) MakeRequest(path string, os []Option) (http.Request, error) {
+func (c Client) MakeRequest(path string, os []Option) (*http.Request, error) {
 	req := http.Request{
 		Method: "GET",
 	}
@@ -62,7 +59,7 @@ func (c Client) MakeRequest(path string, os []Option) (http.Request, error) {
 
 	pathURL, err := url.Parse(path)
 	if err != nil {
-		return req, fmt.Errorf("error parsing constructed path and query: %w", err)
+		return &req, fmt.Errorf("error parsing constructed path and query: %w", err)
 	}
 
 	requestURL := c.BaseURL.ResolveReference(pathURL)
@@ -72,23 +69,29 @@ func (c Client) MakeRequest(path string, os []Option) (http.Request, error) {
 	req.Header.Add("Authorization", "Token "+c.Token)
 	req.Header.Add("User-Agent", c.UserAgent)
 
-	return req, nil
+	return &req, nil
 }
 
 // CallEndpoint is a generic method for making API calls at the endpoint. This
 // method is exposed to provide flexibility, but should not normally be used.
-func (c Client) CallEndpoint(path string, o []Option, r interface{}) error {
+func (c Client) CallEndpoint(
+	ctx context.Context,
+	path string,
+	o []Option,
+	r interface{},
+) error {
 	req, err := c.MakeRequest(path, o)
 	if err != nil {
 		return fmt.Errorf("error building request: %w", err)
 	}
 
-	res, err := c.Client.Do(&req)
+	req = req.WithContext(ctx)
+	res, err := c.Client.Do(req)
 	if err != nil {
 		return fmt.Errorf("error making request: %w", err)
 	}
 
-	resBytes, err := ioutil.ReadAll(res.Body)
+	resBytes, err := io.ReadAll(res.Body)
 	if err != nil {
 		return fmt.Errorf("error reading response: %w", err)
 	}
