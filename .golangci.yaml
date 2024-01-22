@@ -35,10 +35,19 @@ linters-settings:
       main:
         files:
           - "$all"
+          - "!**/tools/**/*.go"
           - "!$test"
         allow:
           - "$gostd"
           - github.com/zostay
+
+      dev:
+        files:
+          - "**/tools/**/*.go"
+        allow:
+          - "$gostd"
+          - github.com/zostay
+          - github.com/iancoleman/strcase
 
       tests:
         files:
