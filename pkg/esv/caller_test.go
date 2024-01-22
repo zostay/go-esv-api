@@ -87,3 +87,10 @@ func TestCallEndpoint(t *testing.T) {
 	assert.Equal(t, "GET", reqs[0].Method)
 	assert.Equal(t, "/zip/zap?a=true&b=false&c=42&d=foo", reqs[0].URL.String())
 }
+
+func TestClient_UserAgentVersion(t *testing.T) {
+	t.Parallel()
+
+	c := esv.Client{}
+	assert.Equal(t, "go-esv-api/"+esv.Version, c.UserAgentVersion())
+}
