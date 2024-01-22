@@ -1,6 +1,6 @@
 module github.com/zostay/go-esv-api
 
-go 1.14
+go 1.16
 
 require (
 	github.com/iancoleman/strcase v0.1.2
